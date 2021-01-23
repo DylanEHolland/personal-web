@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {testCall} from "./api";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from "./components/Home";
+import Page from "./components/Page";
+import Create from "./components/Create";
+
+import './custom.scss';
+
+export default class App extends React.Component {
+	state = {
+		connection: null
+	}
+
+	componentDidMount() {
+		testCall()
+		.then(
+			data => {
+				let output = false;
+				if(data === "1") {
+					output = true;
+				}
+
+				this.setState({
+					connection: output
+				});
+			}
+		)
+	}
+
+	render = () => {
+		if(this.state.connection === null) {
+			return null;
+		}
+
+		return (
+			<div className="main__frame">
+				{this.state.connection ? (
+					<Router>
+					<Route path="/" component={Home} exact />
+					<Route path="/page/:pageUrl" component={Page} />
+					<Route path="/create" component={Create} />
+				</Router>
+				) : <>Error connecting to backend</>}
+			</div>
+		);
+	}
 }
 
-export default App;
+const log = (...msg) => {
+	console.log("[App]", ...msg);
+}
