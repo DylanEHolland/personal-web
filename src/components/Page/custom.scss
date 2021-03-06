@@ -1,0 +1,26 @@
+.page {
+    border-right: 1px solid #404040;
+    border-left: 1px solid #404040;
+    margin: auto;
+    max-width: 700px;
+    width: 100%;
+    padding: 0 24px 24px 24px;
+
+    .edit__box {
+        width: 100%;
+        height: 500px;
+        outline: none;
+        resize: none;
+    }
+
+    .submit__button {
+        background-color: #d73a49;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #F0F0F0;
+        font-weight: bold;
+        margin: 48px auto 0 auto;
+        padding: 10px 25px 10px 25px;
+        width: fit-content;
+    }
+}

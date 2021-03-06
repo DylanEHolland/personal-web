@@ -1,6 +1,7 @@
 import React from 'react';
 import {editPage, loadPage} from "../../api";
 import './custom.scss';
+import ReactMarkdown from 'react-markdown'
 
 export default class Page extends React.Component {
     state = {
@@ -28,8 +29,8 @@ export default class Page extends React.Component {
         }
 
         return (
-            <div>
-                <b>{this.state.data.title}</b>
+            <div className="page">
+                <h1>{this.state.data.title}</h1>
                 {
                     (this.state.editMode)
                     ? (
@@ -44,16 +45,19 @@ export default class Page extends React.Component {
                                         }
                                     }
                                     value={this.state.editText}
+                                    className="edit__box"
                                 />
                             </div>
-                            <div onClick={this.submitEdit}>SUBMIT</div>
+                            <div className="submit__button" onClick={this.submitEdit}>SUBMIT</div>
                         </>
                     ) : (
                         <>
                             <div>
-                                {this.state.data.content}
+                                <ReactMarkdown>
+                                    {this.state.data.content}
+                                </ReactMarkdown>
                             </div>
-                            <div onClick={this.toggleEditMode}>EDIT</div>
+                            <div className="submit__button" onClick={this.toggleEditMode}>EDIT</div>
                         </>
                     )
                 }
