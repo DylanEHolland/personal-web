@@ -108,3 +108,43 @@ export const linkedInFinalize = code => {
         }
     ).then(res => res.json());
 }
+
+export const checkToken = () => {
+    const url = `${API_URL}/check-token`
+    var headers = backend_headers();
+
+    return fetch(
+        url, {
+            method: "GET",
+            headers
+        }
+    );
+}
+
+export const refreshToken = () => {
+    const url = `${API_URL}/login/refresh`;
+    var headers = {...JSON_HEADERS};
+    headers['Authorization'] = "Bearer " + store.get('refresh_token');
+    return fetch(
+        url, {
+            method: "GET",
+            headers
+        }
+    ).then(res => res.json());
+}
+
+export const uploadImageToBackend = (pageUrl, image_data) => {
+    const url = `${API_URL}/image/upload`;
+    var headers = backend_headers();
+
+    return fetch(
+        url, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+                page_url: pageUrl,
+                image_data: image_data
+            })
+        }
+    ).then(res => res.json());
+}

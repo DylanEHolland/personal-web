@@ -1,5 +1,5 @@
 import React from 'react';
-import {testCall} from "./api";
+import {testCall, checkToken, refreshToken} from "./api";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import store from 'store';
 
@@ -28,7 +28,29 @@ export default class App extends React.Component {
 
 				this.setState({
 					connection: output
-				}, () => log("Connected to backend"));
+				}, () => {
+					log("Connected to backend")
+					if(store.get('token')) {
+						checkToken()
+						.then(
+							res => {
+								if(res.status === 401) {
+									refreshToken()
+									.then(
+										data => {
+											store.set("token", data.access_token);
+										}
+									)
+								}
+							}
+						)
+					}
+					// .then(
+					// 	data => {
+					// 		log("Okay")
+					// 	}
+					// )
+				});
 			}
 		)
 

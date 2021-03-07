@@ -4,11 +4,15 @@ import './custom.scss';
 import ReactMarkdown from 'react-markdown'
 import store from 'store';
 
+import ImageUploader from "../ImageUploader";
+
 export default class Page extends React.Component {
     state = {
         data: null,
         editMode: false,
         editText: "",
+        pageUrl: null,
+        uploadedImages: null
     }
 
     componentDidMount() {
@@ -17,7 +21,9 @@ export default class Page extends React.Component {
         loadPage(pageUrl).then(
             data => {
                 this.setState({
-                    data: data.results
+                    data: data.results,
+                    uploadedImages: data.images,
+                    pageUrl: pageUrl
                 }, () => log("Page loaded successfully"));
             }
         )
@@ -62,6 +68,13 @@ export default class Page extends React.Component {
                             {token && (<div className="submit__button" onClick={this.toggleEditMode}>EDIT</div>)}
                         </>
                     )
+                }
+                {
+                    (this.state.editMode) && 
+                        <ImageUploader 
+                            page={this.state.pageUrl}
+                            images={this.state.uploadedImages}
+                        />
                 }
             </div>
         )
