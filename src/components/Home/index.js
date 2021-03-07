@@ -1,16 +1,14 @@
 import React from 'react';
 import store from 'store';
 import {
-    allPages,
-    requestLinkedinTokenUrl
+    allPages
 } from '../../api';
 
 import './custom.scss';
 
 export default class Home extends React.Component {
     state = {
-        pages: null,
-        linkedin_redirect_url: null
+        pages: null
     };
 
     componentDidMount() {
@@ -20,15 +18,6 @@ export default class Home extends React.Component {
                 this.setState({
                     pages: data.pages
                 }, () => log("Loaded page list"))
-            }
-        )
-
-        requestLinkedinTokenUrl()
-        .then(
-            data => {
-                this.setState({
-                    linkedin_redirect_url: data.redirect_url
-                });
             }
         )
     }
@@ -55,13 +44,6 @@ export default class Home extends React.Component {
         
         return (
             <div className="home">
-                
-                {
-                    ( (token === undefined) && linkedin_redirect_url) ? 
-                        <a href={linkedin_redirect_url}>Login with linkedin</a>
-                        : <a href="/logout">logout</a>
-                }
-
                 {this.state.pages.map(
                     (data, idx) => this.displayPageLink(data, idx)
                 )}

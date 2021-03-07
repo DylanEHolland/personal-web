@@ -8,6 +8,7 @@ import Page from "./components/Page";
 import Create from "./components/Create";
 import LinkedInVerifier from "./components/LinkedInVerifier";
 import Logout from "./components/Logout";
+import NavBar from "./components/NavBar";
 
 import './custom.scss';
 
@@ -44,17 +45,20 @@ export default class App extends React.Component {
 		}
 
 		return (
-			<div className="main__frame">
-				{this.state.connection ? (
-					<Router>
-						<Route path="/" component={Home} exact />
-						<Route path="/page/:pageUrl" component={Page} />
-						<Route path="/create" component={Create} />
-						<Route path="/auth/linkedin-callback" component={LinkedInVerifier} />
-						<Route path="/logout" component={Logout} />
-					</Router>
-				) : <>Error connecting to backend</>}
-			</div>
+			<>
+				<NavBar />
+				<div className="main__frame">
+					{this.state.connection ? (
+						<Router>
+							<Route path="/" component={Home} exact />
+							<Route path="/page/:pageUrl" component={Page} />
+							<Route path="/create" component={Create} />
+							<Route path="/auth/linkedin-callback" component={LinkedInVerifier} />
+							<Route path="/logout" component={Logout} />
+						</Router>
+					) : <>Error connecting to backend</>}
+				</div>
+			</>
 		);
 	}
 }

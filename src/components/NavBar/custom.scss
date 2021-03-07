@@ -1,0 +1,29 @@
+.nav__bar {
+    background-color: #3A3832;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+        font-size: 2em;
+        text-transform: uppercase;
+        font-family: Arial,Helvetica,sans-serif;
+        color: #FFFFFF;
+        padding-left: 20px;
+        cursor: pointer;
+
+        @media screen and (max-width: 768px) {
+            font-size: 1.3em;
+            padding-left: 1px;
+        }
+    }
+
+    .login__action {
+        margin: auto 0;
+        padding-right: 8px;
+        a, a:link, a:active, a:visited {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+    }
+}
