@@ -45,11 +45,6 @@ export default class App extends React.Component {
 							}
 						)
 					}
-					// .then(
-					// 	data => {
-					// 		log("Okay")
-					// 	}
-					// )
 				});
 			}
 		)
@@ -59,11 +54,11 @@ export default class App extends React.Component {
 
 	render = () => {
 		if(this.state.connection === null) {
-			return null;
+			return <>Error connecting to backend</>;;
 		}
 
 		if(this.state.connection === false) {
-			return <>Error connecting to backend</>;
+			return <>Error in to backend</>;
 		}
 
 		return (

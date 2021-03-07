@@ -1,6 +1,8 @@
 import store from 'store';
 
-const API_URL = "http://localhost:5000";
+console.log("using backend", process.env.REACT_APP_BACKEND_URL);
+
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 const JSON_HEADERS = { "Content-Type": "application/json" };
 
 const backend_headers = () => {
