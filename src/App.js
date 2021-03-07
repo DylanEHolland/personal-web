@@ -17,7 +17,6 @@ export default class App extends React.Component {
 	}
 
 	componentDidMount() {
-		log(store.get("token"));
 		testCall()
 		.then(
 			data => {
@@ -28,9 +27,11 @@ export default class App extends React.Component {
 
 				this.setState({
 					connection: output
-				});
+				}, () => log("Connected to backend"));
 			}
 		)
+
+		log("Using token", store.get("token"));
 	}
 
 	render = () => {
@@ -46,12 +47,12 @@ export default class App extends React.Component {
 			<div className="main__frame">
 				{this.state.connection ? (
 					<Router>
-					<Route path="/" component={Home} exact />
-					<Route path="/page/:pageUrl" component={Page} />
-					<Route path="/create" component={Create} />
-					<Route path="/auth/linkedin-callback" component={LinkedInVerifier} />
-					<Route path="/logout" component={Logout} />
-				</Router>
+						<Route path="/" component={Home} exact />
+						<Route path="/page/:pageUrl" component={Page} />
+						<Route path="/create" component={Create} />
+						<Route path="/auth/linkedin-callback" component={LinkedInVerifier} />
+						<Route path="/logout" component={Logout} />
+					</Router>
 				) : <>Error connecting to backend</>}
 			</div>
 		);

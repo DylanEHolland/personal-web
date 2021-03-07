@@ -12,6 +12,7 @@ export default class LinkedInVerifier extends React.Component {
         linkedInFinalize(parsed.code)
         .then(
             data => {
+                log(data.access_token);
                 store.set("token", data.access_token);
                 window.location.href = '/';
             }

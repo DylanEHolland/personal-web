@@ -19,7 +19,7 @@ export default class Home extends React.Component {
             data => {
                 this.setState({
                     pages: data.pages
-                })
+                }, () => log("Loaded page list"))
             }
         )
 

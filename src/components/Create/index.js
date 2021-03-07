@@ -14,6 +14,7 @@ export default class Create extends React.Component {
         createPage(this.state.title, this.state.body)
         .then(
             data => {
+                log("Creating", data.url);
                 window.location.href = "/page/" + data.url;
             }
         )

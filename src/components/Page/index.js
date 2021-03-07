@@ -16,10 +16,9 @@ export default class Page extends React.Component {
 
         loadPage(pageUrl).then(
             data => {
-                log(data)
                 this.setState({
                     data: data.results
-                });
+                }, () => log("Page loaded successfully"));
             }
         )
     }
