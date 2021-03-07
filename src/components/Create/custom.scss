@@ -1,3 +1,40 @@
 .create__form {
     max-width: 700px;
+    margin: auto;
+
+    width: 100%;
+    .title__wrapper {
+        margin-top: 48px;
+        width: 60%;
+        .title {
+            resize: none;
+            outline: none;
+            font-size: 2em;
+        }
+    }
+
+    .content_editor {
+        margin-top: 20px;
+        resize: none;
+        outline: none;
+        width: 100%;
+        font-size: 1.2em;
+        height: 360px;
+    }
+
+    .submit__btn--inactive {
+        cursor: grab !important;
+        background-color: #d9868e !important;
+    }
+
+    .submit__btn {
+        background-color: #d73a49;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #F0F0F0;
+        font-weight: bold;
+        margin: 48px auto 0 auto;
+        padding: 10px 25px 10px 25px;
+        width: fit-content;
+    }
 }

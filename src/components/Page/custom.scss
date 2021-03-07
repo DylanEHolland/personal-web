@@ -1,9 +1,12 @@
 .page {
-    border-right: 1px solid #404040;
-    border-left: 1px solid #404040;
+    // border-right: 1px solid #404040;
+    // border-left: 1px solid #404040;
     margin: auto;
     max-width: 700px;
-    width: 100%;
+
+    // @media screen and (max-width: 750px) {
+    //     width: 100%;
+    // }
     padding: 0 24px 24px 24px;
 
     .edit__box {

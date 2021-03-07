@@ -1,14 +1,39 @@
+import store from 'store';
+
 const API_URL = "http://localhost:5000";
 const JSON_HEADERS = { "Content-Type": "application/json" };
 
+const backend_headers = () => {
+    var headers = { ...JSON_HEADERS };
+    var token = store.get('token');
+
+    if(token !== undefined) {
+        headers['Authorization'] = "Bearer " + token;
+    }
+
+    return headers;
+}
+
+export const allPages = () => {
+    const url = `${API_URL}/all-pages`   
+    var headers = { ...JSON_HEADERS };
+
+    return fetch(
+        url, {
+            method: "GET",
+            headers
+        }
+    ).then(res => res.json());
+}
+
 export const testCall = () => {
     const url = `${API_URL}`;
-    var headers = { ...JSON_HEADERS };
+    var headers = backend_headers();
 
     return fetch(
         url, { 
             method: "GET", 
-            headers 
+            headers
         }
     ).then(res => res.json());
 }
@@ -25,17 +50,16 @@ export const loadPage = pageUrl => {
     ).then(res => res.json());
 }
 
-export const createPage = (title, purl, body) => {
+export const createPage = (title, body) => {
     const url = `${API_URL}/create`;
-    var headers = { ...JSON_HEADERS };
-
+    var headers = backend_headers();
+    console.log(headers);
     return fetch(
         url, { 
             method: "POST", 
             headers,
             body: JSON.stringify({
                 title: title,
-                purl: purl,
                 body: body
             })
         }
@@ -44,7 +68,7 @@ export const createPage = (title, purl, body) => {
 
 export const editPage = (content, purl) => {
     const url = `${API_URL}/submit-edit`;
-    var headers = { ...JSON_HEADERS };
+    var headers = backend_headers();
 
     return fetch(
         url, { 
@@ -56,4 +80,31 @@ export const editPage = (content, purl) => {
             })
         }
     ).then(res => res.json());     
+}
+
+export const requestLinkedinTokenUrl = () => {
+    const url = `${API_URL}/login/linkedin/request`;
+    var headers = { ...JSON_HEADERS };
+
+    return fetch(
+        url, {
+            method: "GET",
+            headers
+        }
+    ).then(res => res.json());
+}
+
+export const linkedInFinalize = code => {
+    const url = `${API_URL}/login/linkedin/confirm`;
+    var headers = { ...JSON_HEADERS };
+
+    return fetch(
+        url, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+                code: code
+            })
+        }
+    ).then(res => res.json());
 }

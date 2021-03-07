@@ -30,6 +30,7 @@ export default class Page extends React.Component {
 
         return (
             <div className="page">
+                <a href="/">back</a>
                 <h1>{this.state.data.title}</h1>
                 {
                     (this.state.editMode)

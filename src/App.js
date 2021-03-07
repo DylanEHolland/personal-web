@@ -1,10 +1,13 @@
 import React from 'react';
 import {testCall} from "./api";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import store from 'store';
 
 import Home from "./components/Home";
 import Page from "./components/Page";
 import Create from "./components/Create";
+import LinkedInVerifier from "./components/LinkedInVerifier";
+import Logout from "./components/Logout";
 
 import './custom.scss';
 
@@ -14,6 +17,7 @@ export default class App extends React.Component {
 	}
 
 	componentDidMount() {
+		log(store.get("token"));
 		testCall()
 		.then(
 			data => {
@@ -31,7 +35,7 @@ export default class App extends React.Component {
 
 	render = () => {
 		if(this.state.connection === null) {
-			return null;
+			return <>Error connecting to backend</>;
 		}
 
 		return (
@@ -41,6 +45,8 @@ export default class App extends React.Component {
 					<Route path="/" component={Home} exact />
 					<Route path="/page/:pageUrl" component={Page} />
 					<Route path="/create" component={Create} />
+					<Route path="/auth/linkedin-callback" component={LinkedInVerifier} />
+					<Route path="/logout" component={Logout} />
 				</Router>
 				) : <>Error connecting to backend</>}
 			</div>
