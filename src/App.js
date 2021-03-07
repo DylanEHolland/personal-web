@@ -35,6 +35,10 @@ export default class App extends React.Component {
 
 	render = () => {
 		if(this.state.connection === null) {
+			return null;
+		}
+
+		if(this.state.connection === false) {
 			return <>Error connecting to backend</>;
 		}
 

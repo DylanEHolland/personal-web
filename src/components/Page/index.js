@@ -2,6 +2,7 @@ import React from 'react';
 import {editPage, loadPage} from "../../api";
 import './custom.scss';
 import ReactMarkdown from 'react-markdown'
+import store from 'store';
 
 export default class Page extends React.Component {
     state = {
@@ -24,6 +25,8 @@ export default class Page extends React.Component {
     }
 
     render = () => {
+        let token = store.get('token');
+
         if(!this.state.data) {
             return null;
         }
@@ -58,7 +61,7 @@ export default class Page extends React.Component {
                                     {this.state.data.content}
                                 </ReactMarkdown>
                             </div>
-                            <div className="submit__button" onClick={this.toggleEditMode}>EDIT</div>
+                            {token && (<div className="submit__button" onClick={this.toggleEditMode}>EDIT</div>)}
                         </>
                     )
                 }
